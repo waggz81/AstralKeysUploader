@@ -44,7 +44,7 @@ namespace AstralKeysUploader
                 var keysList = new List<Keystone>();
                 string filePath = directoryPath.Text + @"\SavedVariables\AstralKeys.lua";
                 DateTime dt = File.GetLastWriteTime(filePath);
-                int timestamp = (int)dt.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+                int timestamp = (int)((DateTimeOffset)dt).ToUnixTimeSeconds();
                 Console.WriteLine("The last write time for this file was {0}.", timestamp);
                 string fileContents = File.ReadAllText(filePath);
                 lua.State.Encoding = Encoding.UTF8;
@@ -85,6 +85,12 @@ namespace AstralKeysUploader
                                 AppendText($"Removed {keysList[index].character} from guild {rioprofile.guild.name}" + Environment.NewLine);
                                 keysList.RemoveAt(index);
                             }
+                            if (rioprofile == null)
+                            {
+                                Console.WriteLine($"Removed {keysList[index].character} from guild {rioprofile.guild.name}");
+                                AppendText($"Removed {keysList[index].character} from guild {rioprofile.guild.name}" + Environment.NewLine);
+                                keysList.RemoveAt(index);
+                            }
                         }
                         catch (Exception e)
                         {
@@ -93,6 +99,13 @@ namespace AstralKeysUploader
                             keysList.RemoveAt(index);
                             Console.WriteLine(e.Message);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("unsuccessful");
+                        Console.WriteLine($"Removed {keysList[index].character} - No RIO profile");
+                        AppendText($"Removed {keysList[index].character} - No RIO profile" + Environment.NewLine);
+                        keysList.RemoveAt(index);
                     }
 
 
@@ -124,7 +137,7 @@ namespace AstralKeysUploader
 
                 AppendText(Environment.NewLine + "___Begin JSON Data___" + Environment.NewLine + json + Environment.NewLine);
                 string curtime = DateTime.Now.ToString("dddd, dd MMMM yyyy HH: mm:ss");
-                AppendText(Environment.NewLine + Environment.NewLine + $"¯¯¯ LAST UPLOAD AT {curtime} ¯¯¯" + Environment.NewLine);
+                AppendText(Environment.NewLine + Environment.NewLine + $"¯¯¯ LAST UPLOAD AT {curtime} ¯¯¯" + Environment.NewLine + response.Content);
             }
         }
 
@@ -320,7 +333,7 @@ namespace AstralKeysUploader
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://home.waggz.us:8181/users");
+            System.Diagnostics.Process.Start("http://juno.waggz.rocks:3000/users");
         }
     }
 }

@@ -12,7 +12,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="URL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://home.waggz.us:8181/upload</Value>
+      <Value Profile="(Default)">http://juno.waggz.rocks:3000/upload</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -51,14 +51,22 @@ namespace AstralKeysUploader
         }
         private Dictionary<int, string> dungeonList = new Dictionary<int, string>
         {
-                {375, "Mists of Tirna Scithe"},
-                {376, "The Necrotic Wake"},
-                {377, "De Other Side"},
-                {378, "Halls of Atonement"},
-                {379, "Plaguefall"},
-                {380, "Sanguine Depths"},
-                {381, "Spires of Ascension"},
-                {382, "Theater of Pain"}
+            {169, "Iron Docks"},
+            {166, "Grimrail Depot"},
+            {227, "Lower Karazhan"},
+            {234, "Upper Karazhan"},
+            {370, "Mechagon Workshop"},
+            {369, "Mechagon Junkyard"},
+            {375, "Mists of Tirna Scithe"},
+            {376, "The Necrotic Wake"},
+            {377, "De Other Side"},
+            {378, "Halls of Atonement"},
+            {379, "Plaguefall"},
+            {380, "Sanguine Depths"},
+            {381, "Spires of Ascension"},
+            {382, "Theater of Pain"},
+            {391, "Streets of Wonder"},
+            {392, "So'leah's Gambit"}
         };
      
     }
