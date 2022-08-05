@@ -335,5 +335,20 @@ namespace AstralKeysUploader
         {
             System.Diagnostics.Process.Start("http://juno.waggz.rocks:3000/users");
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey
+                ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (checkBox1.Checked)
+                rk.SetValue("AstralKeysUploader", Application.ExecutablePath);
+            else
+                rk.DeleteValue("AstralKeysUploader", false);
+        }
     }
 }
