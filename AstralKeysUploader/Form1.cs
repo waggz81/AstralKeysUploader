@@ -341,9 +341,22 @@ namespace AstralKeysUploader
             RegistryKey rk = Registry.CurrentUser.OpenSubKey
                 ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             if (checkBox1.Checked)
+            {
                 rk.SetValue("AstralKeysUploader", Application.ExecutablePath);
+                Settings.RunOnStartup = true;
+            }
             else
+            {
                 rk.DeleteValue("AstralKeysUploader", false);
+                Settings.RunOnStartup = false;
+            }
+        }
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (Settings.RunOnStartup)
+            {
+                Launch();
+            }
         }
     }
 }
