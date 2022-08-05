@@ -345,10 +345,5 @@ namespace AstralKeysUploader
             else
                 rk.DeleteValue("AstralKeysUploader", false);
         }
-
-        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
-        {
-            
-        }
     }
 }
