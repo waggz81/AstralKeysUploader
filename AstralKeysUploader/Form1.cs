@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
+using NLua;
+using RestSharp;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using NLua;
-using System.IO;
-using RestSharp;
-using Newtonsoft.Json;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Microsoft.Win32;
-using System.ComponentModel;
 
 namespace AstralKeysUploader
 {
@@ -338,17 +338,17 @@ namespace AstralKeysUploader
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
-        {
             RegistryKey rk = Registry.CurrentUser.OpenSubKey
                 ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             if (checkBox1.Checked)
                 rk.SetValue("AstralKeysUploader", Application.ExecutablePath);
             else
                 rk.DeleteValue("AstralKeysUploader", false);
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            
         }
     }
 }
