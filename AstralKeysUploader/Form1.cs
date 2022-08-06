@@ -351,8 +351,24 @@ namespace AstralKeysUploader
                 Settings.RunOnStartup = false;
             }
         }
+
+        private void checkBox1_CheckedBox()
+        {
+            string keyName = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+            string valueName = "AstralKeysUploader";
+            if (Registry.GetValue(keyName, valueName, null) == null)
+            {
+                checkBox1.Checked = false;
+            }
+            else
+            {
+                checkBox1.Checked = true;
+            }
+        }
+
         private void Form1_Shown(object sender, EventArgs e)
         {
+            checkBox1_CheckedBox();
             if (Settings.RunOnStartup)
             {
                 Launch();
