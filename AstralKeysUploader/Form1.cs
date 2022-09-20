@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
+using NLua;
+using RestSharp;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using NLua;
-using System.IO;
-using RestSharp;
-using Newtonsoft.Json;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using Microsoft.Win32;
-using System.ComponentModel;
 
 namespace AstralKeysUploader
 {
@@ -334,6 +334,45 @@ namespace AstralKeysUploader
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://juno.waggz.rocks:3000/users");
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey
+                ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (checkBox1.Checked)
+            {
+                rk.SetValue("AstralKeysUploader", Application.ExecutablePath);
+                Settings.RunOnStartup = true;
+            }
+            else
+            {
+                rk.DeleteValue("AstralKeysUploader", false);
+                Settings.RunOnStartup = false;
+            }
+        }
+
+        private void checkBox1_CheckedBox()
+        {
+            string keyName = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+            string valueName = "AstralKeysUploader";
+            if (Registry.GetValue(keyName, valueName, null) == null)
+            {
+                checkBox1.Checked = false;
+            }
+            else
+            {
+                checkBox1.Checked = true;
+            }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            checkBox1_CheckedBox();
+            if (Settings.RunOnStartup)
+            {
+                Launch();
+            }
         }
     }
 }
